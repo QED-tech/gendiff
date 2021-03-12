@@ -1,5 +1,8 @@
 #!/usr/bin/env php
 <?php
+
+use function Differ\Differ\gendiff;
+
 include __DIR__ . '/../vendor/autoload.php';
 
 $doc = <<<DOC
@@ -21,4 +24,11 @@ $handler = new \Docopt\Handler(array(
     'help' => true,
     'optionsFirst' => false,
 ));
-$handler->handle($doc, $argv);
+
+try {
+    $result = gendiff($args->args['<firstFile>'], $args->args['<secondFile>']);
+    print_r($result . PHP_EOL);
+} catch (\Throwable $e) {
+    print_r($e->getMessage());
+    $handler->handle($doc, $argv);
+}

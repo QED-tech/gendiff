@@ -9,8 +9,13 @@
         }
     ],
     "bin": [
-        "bin/gendiff"
+        "./bin/gendiff"
     ],
+    "autoload": {
+        "files": [
+            "./src/differ/Differ.php"
+        ]
+    },
     "scripts": {
         "phpcs": "phpcs -- --standard=PSR2 src bin"
     },
