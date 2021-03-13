@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-use function Differ\Differ\gendiff;
+use function Differ\gendiff;
 
 include __DIR__ . '/../vendor/autoload.php';
 
@@ -27,7 +27,7 @@ $handler = new \Docopt\Handler(array(
 
 try {
     $result = gendiff($args->args['<firstFile>'], $args->args['<secondFile>']);
-    print_r($result . PHP_EOL);
+    print_r($result);
 } catch (\Throwable $e) {
     print_r($e->getMessage());
     $handler->handle($doc, $argv);
