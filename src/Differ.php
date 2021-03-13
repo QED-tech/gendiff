@@ -3,6 +3,7 @@
 namespace Differ;
 
 use Exception;
+
 use function Differ\Formatters\getPlain;
 use function Differ\parser;
 
