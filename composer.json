@@ -14,8 +14,9 @@
     "autoload": {
         "files": [
             "./src/Differ.php",
-            "./src/Parser.php",
-            "./src/formatters/Plain.php"
+            "./src/DiffParser.php",
+            "./src/formatters/Plain.php",
+            "./src/FileParser.php"
         ]
     },
     "scripts": {
