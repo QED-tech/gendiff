@@ -20,8 +20,8 @@ class DifferTest extends TestCase
         $path = __DIR__ . '/fixtures/data';
         $expected = include __DIR__ . '/fixtures/expected.php';
         return [
-            ["{$path}/file1.json", "{$path}/file2.json", $expected[0][0]],
-            ["{$path}/file1.yml", "{$path}/file2.yml", $expected[0][0]],
+            ["{$path}/flatFirst.json", "{$path}/flatSecond.json", $expected[0]],
+            ["{$path}/flatFirst.yml", "{$path}/flatSecond.yml", $expected[0]],
         ];
     }
 }

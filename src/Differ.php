@@ -28,6 +28,9 @@ function getDiff(array $firstList, array $secondList): string
     return getPlain(array_values($diff));
 }
 
+/**
+ * @throws Exception
+ */
 function filesIsExists(array $files): void
 {
     foreach ($files as $file) {
