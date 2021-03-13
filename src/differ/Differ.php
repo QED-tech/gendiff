@@ -22,7 +22,6 @@ function getDiff(array $firstList, array $secondList)
     $diff = '{' . PHP_EOL;
 
     foreach (array_keys($firstList) as $key) {
-
         $valueFirst = boolToString($firstList[$key]);
         $valueSecond = boolToString($secondList[$key] ?? '');
 
