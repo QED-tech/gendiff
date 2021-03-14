@@ -34,12 +34,12 @@ function plain(array $diff, string $parentKey = ''): string
 
 function checkValuePlain($value): string
 {
-    if (is_array($value)) {
-        return "[complex value]";
+    if (is_string($value)) {
+        return "'$value'";
     }
 
-    if ($value === '') {
-        return "''";
+    if (is_array($value)) {
+        return "[complex value]";
     }
 
     return $value;
