@@ -34,5 +34,13 @@ function plain(array $diff, string $parentKey = ''): string
 
 function checkValuePlain($value): string
 {
-    return is_array($value) ? "[complex value]" : "'$value'";
+    if (is_array($value)) {
+        return "[complex value]";
+    }
+
+    if ($value === '') {
+        return "''";
+    }
+
+    return $value;
 }
