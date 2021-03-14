@@ -4,10 +4,10 @@ namespace Differ;
 
 use Exception;
 
-use function Differ\Formatters\getPlain;
+use function Differ\Formatters\stylish;
 use function Differ\parser;
 
-function gendiff(string $firstFile, string $secondFile): string
+function gendiff(string $firstFile, string $secondFile, string $format = 'stylish'): string
 {
     try {
         filesIsExists([$firstFile, $secondFile]);
@@ -16,10 +16,10 @@ function gendiff(string $firstFile, string $secondFile): string
     }
 
     [$firstAsArray, $secondAsArray] = getFiles($firstFile, $secondFile);
-    return getPlain(getDiff($firstAsArray, $secondAsArray));
+    return formatted($format, getdiff($firstAsArray, $secondAsArray));
 }
 
-function getDiff(array $firstList, array $secondList): array
+function getdiff(array $firstList, array $secondList): array
 {
     $keys = getAllUniqueKeys($firstList, $secondList);
     return array_values(array_map(function ($key) use ($firstList, $secondList) {
@@ -27,7 +27,7 @@ function getDiff(array $firstList, array $secondList): array
             return [
                 'key' => $key,
                 'description' => 'parent',
-                'children' => getDiff($firstList[$key], $secondList[$key]),
+                'children' => getdiff($firstList[$key], $secondList[$key]),
             ];
         }
         return parser($key, $firstList, $secondList);
@@ -44,6 +44,17 @@ function getAllUniqueKeys(array $firstList, array $secondList): array
     );
     asort($keys, SORT_STRING);
     return $keys;
+}
+
+function formatted(string $format, $diff): string
+{
+    switch ($format) {
+        case 'stylish':
+            return stylish($diff);
+
+        default:
+            return stylish($diff);
+    }
 }
 
 /**

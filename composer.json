@@ -16,6 +16,7 @@
             "./src/Differ.php",
             "./src/DiffParser.php",
             "./src/formatters/Plain.php",
+            "./src/formatters/Stylish.php",
             "./src/FileParser.php"
         ]
     },

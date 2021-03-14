@@ -9,9 +9,9 @@ class DifferTest extends TestCase
     /**
      * @dataProvider additionalProvider
      */
-    public function testGetDiff(string $firstFilePath, string $secondFilePath, $expected)
+    public function testGetDiff(string $format, string $firstFilePath, string $secondFilePath, $expected)
     {
-        $actual = gendiff($firstFilePath, $secondFilePath);
+        $actual = gendiff($firstFilePath, $secondFilePath, $format);
         $this->assertEquals($expected, $actual);
     }
 
@@ -20,9 +20,11 @@ class DifferTest extends TestCase
         $path = __DIR__ . '/fixtures/data';
         $expected = include __DIR__ . '/fixtures/expected.php';
         return [
-            ["{$path}/flatFirst.json", "{$path}/flatSecond.json", $expected[0]],
-            ["{$path}/flatFirst.yml", "{$path}/flatSecond.yml", $expected[0]],
-            ["{$path}/nestedFirst.json", "{$path}/nestedSecond.json", $expected[1]],
+            ["stylish", "{$path}/flatFirst.json", "{$path}/flatSecond.json", $expected[0]],
+            ["stylish", "{$path}/flatFirst.yml", "{$path}/flatSecond.yml", $expected[0]],
+            ["stylish", "{$path}/flatFirst.json", "{$path}/flatSecond.yml", $expected[0]],
+            ["stylish", "{$path}/flatFirst.yml", "{$path}/flatSecond.json", $expected[0]],
+            ["stylish", "{$path}/nestedFirst.json", "{$path}/nestedSecond.json", $expected[1]],
         ];
     }
 }
