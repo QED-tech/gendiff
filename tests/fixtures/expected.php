@@ -75,4 +75,137 @@ Property 'group2' was removed
 Property 'group3' was added with value: [complex value]
 
 TEXT
+,
+<<<JSON
+[
+    {
+        "key": "common",
+        "description": "parent",
+        "children": [
+            {
+                "key": "follow",
+                "value": "false",
+                "changed": true,
+                "description": "added"
+            },
+            {
+                "key": "setting1",
+                "value": "Value 1",
+                "changed": false,
+                "description": "unchanged"
+            },
+            {
+                "key": "setting2",
+                "value": 200,
+                "changed": true,
+                "description": "deleted"
+            },
+            {
+                "key": "setting3",
+                "oldValue": "true",
+                "newValue": "null",
+                "changed": true,
+                "description": "update"
+            },
+            {
+                "key": "setting4",
+                "value": "blah blah",
+                "changed": true,
+                "description": "added"
+            },
+            {
+                "key": "setting5",
+                "value": {
+                    "key5": "value5"
+                },
+                "changed": true,
+                "description": "added"
+            },
+            {
+                "key": "setting6",
+                "description": "parent",
+                "children": [
+                    {
+                        "key": "doge",
+                        "description": "parent",
+                        "children": [
+                            {
+                                "key": "wow",
+                                "oldValue": "",
+                                "newValue": "so much",
+                                "changed": true,
+                                "description": "update"
+                            }
+                        ]
+                    },
+                    {
+                        "key": "key",
+                        "value": "value",
+                        "changed": false,
+                        "description": "unchanged"
+                    },
+                    {
+                        "key": "ops",
+                        "value": "vops",
+                        "changed": true,
+                        "description": "added"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "key": "group1",
+        "description": "parent",
+        "children": [
+            {
+                "key": "baz",
+                "oldValue": "bas",
+                "newValue": "bars",
+                "changed": true,
+                "description": "update"
+            },
+            {
+                "key": "foo",
+                "value": "bar",
+                "changed": false,
+                "description": "unchanged"
+            },
+            {
+                "key": "nest",
+                "oldValue": {
+                    "key": "value"
+                },
+                "newValue": "str",
+                "changed": true,
+                "description": "update"
+            }
+        ]
+    },
+    {
+        "key": "group2",
+        "value": {
+            "abc": 12345,
+            "deep": {
+                "id": 45
+            }
+        },
+        "changed": true,
+        "description": "deleted"
+    },
+    {
+        "key": "group3",
+        "value": {
+            "deep": {
+                "id": {
+                    "number": 45
+                }
+            },
+            "fee": 100500
+        },
+        "changed": true,
+        "description": "added"
+    }
+]
+JSON
 ];

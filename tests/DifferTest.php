@@ -25,6 +25,7 @@ class DifferTest extends TestCase
             ["stylish", "{$path}/flatFirst.json", "{$path}/flatSecond.yml", $expected[0]],
             ["stylish", "{$path}/flatFirst.yml", "{$path}/flatSecond.json", $expected[0]],
             ["plain", "{$path}/nestedFirst.json", "{$path}/nestedSecond.json", $expected[2]],
+            ["json", "{$path}/nestedFirst.json", "{$path}/nestedSecond.json", $expected[3]],
         ];
     }
 }
