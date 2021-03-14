@@ -21,7 +21,10 @@ function getAsArrayByExtension(array $files): array
                 $result[] = json_decode($content, true);
                 break;
             case 'yml':
-                $result[] = (array) Yaml::parse($content, Yaml::PARSE_OBJECT_FOR_MAP);
+                $result[] = Yaml::parse($content);
+                break;
+            case 'yaml':
+                $result[] = Yaml::parse($content);
                 break;
             default:
                 throw new \Exception("Format '$extension' is unknown for parsing");
