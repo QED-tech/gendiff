@@ -36,7 +36,7 @@ function stylish(array $diff, $space = 2): string
         }
     }
 
-    return $result . $spCloseTag . '}';
+    return $result . $spCloseTag . '}' . PHP_EOL;
 }
 
 function checkValueStylish($value, $space = 0): string

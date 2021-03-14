@@ -51,13 +51,13 @@ function formatted(string $format, $diff): string
 {
     switch ($format) {
         case 'stylish':
-            return stylish($diff);
+            return trim(stylish($diff));
         case 'plain':
-            return plain($diff);
+            return trim(plain($diff));
         case 'json':
             return json_encode($diff, JSON_PRETTY_PRINT);
         default:
-            return stylish($diff);
+            return trim(stylish($diff));
     }
 }
 
