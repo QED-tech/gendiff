@@ -20,7 +20,7 @@ function genDiff(string $firstFile, string $secondFile, string $format = 'stylis
     return formatted($format, getDiff($firstAsArray, $secondAsArray));
 }
 
-function getDiff(array $firstList, array $secondList): array
+function getDiff(?array $firstList, ?array $secondList): array
 {
     $keys = getAllUniqueKeys($firstList, $secondList);
     return array_values(array_map(function ($key) use ($firstList, $secondList) {

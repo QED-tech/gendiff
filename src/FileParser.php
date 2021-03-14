@@ -23,6 +23,8 @@ function getAsArrayByExtension(array $files): array
             case 'yml':
                 $result[] = (array) Yaml::parse($content, Yaml::PARSE_OBJECT_FOR_MAP);
                 break;
+            default:
+                throw new \Exception("Format '$extension' is unknown for parsing");
         }
     }
 
