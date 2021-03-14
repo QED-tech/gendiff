@@ -2,20 +2,22 @@
 
 namespace Differ\Formatters;
 
+const SPACE_COUNT = 4;
+
 function stylish(array $diff, $space = 0): string
 {
     $result = '{' . PHP_EOL;
     [$sp, $spCloseTag] = getSpace($space);
     foreach ($diff as $item) {
-        $value = checkValueOnNested($item['value'] ?? '', $space + 4);
         $key = "{$item['key']}:";
-        $oldValue = checkValueOnNested($item['oldValue'] ?? '', $space + 4);
-        $newValue = checkValueOnNested($item['newValue'] ?? '', $space + 4);
+        $value = checkValueStylish($item['value'] ?? '', $space + SPACE_COUNT);
+        $oldValue = checkValueStylish($item['oldValue'] ?? '', $space + SPACE_COUNT);
+        $newValue = checkValueStylish($item['newValue'] ?? '', $space + SPACE_COUNT);
 
         switch ($item['description']) {
             case 'parent':
                 $result .= $sp . "  $key ";
-                $result .= stylish($item['children'], $space + 4);
+                $result .= stylish($item['children'], $space + SPACE_COUNT);
                 break;
 
             case 'deleted':
@@ -37,7 +39,7 @@ function stylish(array $diff, $space = 0): string
     return $result . $spCloseTag . '}' . PHP_EOL;
 }
 
-function checkValueOnNested($value, $space = 0): string
+function checkValueStylish($value, $space = 0): string
 {
     if (!is_array($value)) {
         return $value;
@@ -46,7 +48,7 @@ function checkValueOnNested($value, $space = 0): string
     [$sp, $spCloseTag] = getSpace($space);
     $result = '{' . PHP_EOL;
     foreach ($value as $key => $val) {
-        $val = checkValueOnNested($val, $space + 4);
+        $val = checkValueStylish($val, $space + SPACE_COUNT);
         $result .= $sp . "  {$key}: {$val}" . PHP_EOL;
     }
     return $result . $spCloseTag . '}';
@@ -56,6 +58,6 @@ function getSpace(int $space): array
 {
     return [
         str_repeat(" ", $space),
-        str_repeat(" ", ($space === 0 ? 0 : $space - 2)),
+        str_repeat(" ", ($space === 0 ? 0 : $space - (SPACE_COUNT / 2))),
     ];
 }

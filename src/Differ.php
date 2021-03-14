@@ -4,6 +4,7 @@ namespace Differ;
 
 use Exception;
 
+use function Differ\Formatters\plain;
 use function Differ\Formatters\stylish;
 use function Differ\parser;
 
@@ -51,7 +52,8 @@ function formatted(string $format, $diff): string
     switch ($format) {
         case 'stylish':
             return stylish($diff);
-
+        case 'plain':
+            return plain($diff);
         default:
             return stylish($diff);
     }
