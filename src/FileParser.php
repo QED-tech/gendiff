@@ -4,15 +4,10 @@ namespace Differ;
 
 use Symfony\Component\Yaml\Yaml;
 
-function getFilesAsSortArray(string $firstFilePath, string $secondFilePath): array
+function getFiles(string $firstFilePath, string $secondFilePath): array
 {
     [$first, $second] = getAsArrayByExtension([$firstFilePath, $secondFilePath]);
-    ksort($first, SORT_STRING);
-    ksort($second, SORT_STRING);
-    return [
-        $first,
-        $second,
-    ];
+    return [$first, $second];
 }
 
 function getAsArrayByExtension(array $files): array

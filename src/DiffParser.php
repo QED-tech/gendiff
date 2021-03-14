@@ -4,8 +4,8 @@ namespace Differ;
 
 function parser(string $key, array $firstList, array $secondList): array
 {
-    $valueFirst = boolToString($firstList[$key] ?? '');
-    $valueSecond = boolToString($secondList[$key] ?? '');
+    $valueFirst = boolToString($firstList[$key] ?? null);
+    $valueSecond = boolToString($secondList[$key] ?? null);
 
     if (!array_key_exists($key, $secondList)) {
         return [
@@ -54,7 +54,12 @@ function parser(string $key, array $firstList, array $secondList): array
     }
 }
 
-function boolToString($value): string
+/**
+ *
+ * @param mixed $value
+ * @return mixed
+ */
+function boolToString($value)
 {
     if ($value === false) {
         return 'false';
@@ -62,6 +67,10 @@ function boolToString($value): string
 
     if ($value === true) {
         return 'true';
+    }
+
+    if ($value === null) {
+        return 'null';
     }
 
     return $value;

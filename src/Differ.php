@@ -15,16 +15,35 @@ function gendiff(string $firstFile, string $secondFile): string
         return $e->getMessage();
     }
 
-    [$firstAsArray, $secondAsArray] = getFilesAsSortArray($firstFile, $secondFile);
+    [$firstAsArray, $secondAsArray] = getFiles($firstFile, $secondFile);
     return getPlain(getDiff($firstAsArray, $secondAsArray));
 }
 
 function getDiff(array $firstList, array $secondList): array
 {
-    $keys = array_unique(array_merge(array_keys($firstList), array_keys($secondList)));
+    $keys = getAllUniqueKeys($firstList, $secondList);
     return array_values(array_map(function ($key) use ($firstList, $secondList) {
+        if (is_array($firstList[$key] ?? null) && is_array($secondList[$key] ?? null)) {
+            return [
+                'key' => $key,
+                'description' => 'parent',
+                'children' => getDiff($firstList[$key], $secondList[$key]),
+            ];
+        }
         return parser($key, $firstList, $secondList);
     }, $keys));
+}
+
+function getAllUniqueKeys(array $firstList, array $secondList): array
+{
+    $keys = array_unique(
+        array_merge(
+            array_keys($firstList),
+            array_keys($secondList)
+        )
+    );
+    asort($keys, SORT_STRING);
+    return $keys;
 }
 
 /**
