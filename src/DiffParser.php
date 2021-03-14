@@ -16,10 +16,7 @@ function parser(string $key, array $firstList, array $secondList): array
         ];
     }
 
-    if (
-        array_key_exists($key, $secondList) &&
-        $valueFirst === $valueSecond
-    ) {
+    if ($valueFirst === $valueSecond) {
         return [
             'key' => $key,
             'value' => $valueFirst,
@@ -28,10 +25,7 @@ function parser(string $key, array $firstList, array $secondList): array
         ];
     }
 
-    if (
-        array_key_exists($key, $secondList) &&
-        !array_key_exists($key, $firstList)
-    ) {
+    if (!array_key_exists($key, $firstList)) {
         return [
             'key' => $key,
             'value' => $valueSecond,
@@ -40,10 +34,7 @@ function parser(string $key, array $firstList, array $secondList): array
         ];
     }
 
-    if (
-        array_key_exists($key, $secondList) &&
-        $valueFirst !== $valueSecond
-    ) {
+    if ($valueFirst !== $valueSecond) {
         return [
             'key' => $key,
             'oldValue' => $valueFirst,
