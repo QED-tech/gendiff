@@ -5,8 +5,7 @@ namespace Differ\Formatters;
 function stylish(array $diff, $space = 0): string
 {
     $result = '{' . PHP_EOL;
-    $sp = str_repeat(" ", $space);
-    $spCloseTag = str_repeat(" ", ($space === 0 ? 0 : $space - 2));
+    [$sp, $spCloseTag] = getSpace($space);
     foreach ($diff as $item) {
         $value = checkValueOnNested($item['value'] ?? '', $space + 4);
         $key = "{$item['key']}:";
@@ -43,12 +42,20 @@ function checkValueOnNested($value, $space = 0): string
     if (!is_array($value)) {
         return $value;
     }
-    $sp = str_repeat(" ", $space);
-    $spCloseTag = str_repeat(" ", ($space === 0 ? 0 : $space - 2));
+
+    [$sp, $spCloseTag] = getSpace($space);
     $result = '{' . PHP_EOL;
     foreach ($value as $key => $val) {
         $val = checkValueOnNested($val, $space + 4);
         $result .= $sp . "  {$key}: {$val}" . PHP_EOL;
     }
     return $result . $spCloseTag . '}';
+}
+
+function getSpace(int $space): array
+{
+    return [
+        str_repeat(" ", $space),
+        str_repeat(" ", ($space === 0 ? 0 : $space - 2)),
+    ];
 }
