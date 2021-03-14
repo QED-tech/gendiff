@@ -1,14 +1,14 @@
 <?php
 
-namespace Differ;
+namespace Differ\Differ;
 
 use Exception;
 
-use function Differ\Formatters\plain;
-use function Differ\Formatters\stylish;
-use function Differ\parser;
+use function Differ\Differ\Formatters\plain;
+use function Differ\Differ\Formatters\stylish;
+use function Differ\Differ\parser;
 
-function gendiff(string $firstFile, string $secondFile, string $format = 'stylish'): string
+function genDiff(string $firstFile, string $secondFile, string $format = 'stylish'): string
 {
     try {
         filesIsExists([$firstFile, $secondFile]);
@@ -17,10 +17,10 @@ function gendiff(string $firstFile, string $secondFile, string $format = 'stylis
     }
 
     [$firstAsArray, $secondAsArray] = getFiles($firstFile, $secondFile);
-    return formatted($format, getdiff($firstAsArray, $secondAsArray));
+    return formatted($format, getDiff($firstAsArray, $secondAsArray));
 }
 
-function getdiff(array $firstList, array $secondList): array
+function getDiff(array $firstList, array $secondList): array
 {
     $keys = getAllUniqueKeys($firstList, $secondList);
     return array_values(array_map(function ($key) use ($firstList, $secondList) {
@@ -28,7 +28,7 @@ function getdiff(array $firstList, array $secondList): array
             return [
                 'key' => $key,
                 'description' => 'parent',
-                'children' => getdiff($firstList[$key], $secondList[$key]),
+                'children' => getDiff($firstList[$key], $secondList[$key]),
             ];
         }
         return parser($key, $firstList, $secondList);

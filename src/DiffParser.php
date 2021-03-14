@@ -1,6 +1,6 @@
 <?php
 
-namespace Differ;
+namespace Differ\Differ;
 
 function parser(string $key, array $firstList, array $secondList): array
 {

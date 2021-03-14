@@ -1,6 +1,6 @@
 <?php
 
-namespace Differ\Formatters;
+namespace Differ\Differ\Formatters;
 
 const SPACE_COUNT = 4;
 

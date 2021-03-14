@@ -1,7 +1,7 @@
 <?php
 namespace Differ\ParserTests;
 
-use function Differ\gendiff;
+use function Differ\Differ\genDiff;
 use PHPUnit\Framework\TestCase;
 
 class DifferTest extends TestCase
@@ -11,7 +11,7 @@ class DifferTest extends TestCase
      */
     public function testGetDiff(string $format, string $firstFilePath, string $secondFilePath, $expected)
     {
-        $actual = gendiff($firstFilePath, $secondFilePath, $format);
+        $actual = genDiff($firstFilePath, $secondFilePath, $format);
         $this->assertEquals($expected, $actual);
     }
 

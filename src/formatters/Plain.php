@@ -1,6 +1,6 @@
 <?php
 
-namespace Differ\Formatters;
+namespace Differ\Differ\Formatters;
 
 function plain(array $diff, string $parentKey = ''): string
 {
