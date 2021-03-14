@@ -1,5 +1,5 @@
 {
-    "name": "qed-tech/gendiff",
+    "name": "hexlet/code",
     "description": "Cli application for search differences in configuration files",
     "type": "project",
     "license": "MIT",
