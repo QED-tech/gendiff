@@ -3,60 +3,60 @@
 return [
     <<<JSON
 {
-- follow: false
-  host: hexlet.io
-- proxy: 123.234.53.22
-- timeout: 50
-+ timeout: 20
-+ verbose: true
+  - follow: false
+    host: hexlet.io
+  - proxy: 123.234.53.22
+  - timeout: 50
+  + timeout: 20
+  + verbose: true
 }
 
 JSON
     ,
     <<<JSON
 {
-  common: {
-    + follow: false
+    common: {
+      + follow: false
       setting1: Value 1
-    - setting2: 200
-    - setting3: true
-    + setting3: null
-    + setting4: blah blah
-    + setting5: {
+      - setting2: 200
+      - setting3: true
+      + setting3: null
+      + setting4: blah blah
+      + setting5: {
           key5: value5
       }
       setting6: {
           doge: {
-            - wow:
-            + wow: so much
+              - wow:
+              + wow: so much
           }
           key: value
-        + ops: vops
+          + ops: vops
       }
-  }
-  group1: {
-    - baz: bas
-    + baz: bars
-      foo: bar
-    - nest: {
-          key: value
-      }
-    + nest: str
-  }
-- group2: {
-      abc: 12345
-      deep: {
-          id: 45
-      }
-  }
-+ group3: {
-      deep: {
-          id: {
-              number: 45
-          }
-      }
-      fee: 100500
-  }
+    }
+    group1: {
+        - baz: bas
+        + baz: bars
+        foo: bar
+        - nest: {
+            key: value
+        }
+        + nest: str
+    }
+    - group2: {
+        abc: 12345
+        deep: {
+            id: 45
+        }
+    }
+    + group3: {
+        deep: {
+            id: {
+                number: 45
+            }
+        }
+        fee: 100500
+    }
 }
 
 JSON
@@ -75,8 +75,8 @@ Property 'group2' was removed
 Property 'group3' was added with value: [complex value]
 
 TEXT
-,
-<<<JSON
+    ,
+    <<<JSON
 [
     {
         "key": "common",

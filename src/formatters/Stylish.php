@@ -4,7 +4,7 @@ namespace Differ\Differ\Formatters;
 
 const SPACE_COUNT = 4;
 
-function stylish(array $diff, $space = 0): string
+function stylish(array $diff, $space = 2): string
 {
     $result = '{' . PHP_EOL;
     [$sp, $spCloseTag] = getSpace($space);
