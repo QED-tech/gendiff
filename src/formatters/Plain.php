@@ -32,8 +32,12 @@ function plain(array $diff, string $parentKey = ''): string
     return $result;
 }
 
-function checkValuePlain($value): string
+function checkValuePlain($value)
 {
+    if ($value === "true" || $value === "false" || $value === "null") {
+        return $value;
+    }
+
     if (is_string($value)) {
         return "'$value'";
     }
