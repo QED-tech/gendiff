@@ -54,6 +54,8 @@ function formatted(string $format, $diff): string
             return stylish($diff);
         case 'plain':
             return plain($diff);
+        case 'json':
+            return json_encode($diff, JSON_PRETTY_PRINT);
         default:
             return stylish($diff);
     }
