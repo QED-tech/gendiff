@@ -20,10 +20,10 @@ function genDiff(string $firstFile, string $secondFile, string $format = 'stylis
     return formatted($format, getDiff($firstAsArray, $secondAsArray));
 }
 
-function getDiff(?array $firstList, ?array $secondList): array
+function getDiff(array $firstList, array $secondList): array
 {
     $keys = getAllUniqueKeys($firstList, $secondList);
-    return array_values(array_map(function ($key) use ($firstList, $secondList) {
+    $diff = array_map(function ($key) use ($firstList, $secondList) {
         if (is_array($firstList[$key] ?? null) && is_array($secondList[$key] ?? null)) {
             return [
                 'key' => $key,
@@ -32,7 +32,9 @@ function getDiff(?array $firstList, ?array $secondList): array
             ];
         }
         return parser($key, $firstList, $secondList);
-    }, $keys));
+    }, $keys);
+
+    return array_values($diff);
 }
 
 function getAllUniqueKeys(array $firstList, array $secondList): array

@@ -2,6 +2,12 @@
 
 namespace Differ\Differ;
 
+/**
+ * @param string $key
+ * @param array $firstList
+ * @param array $secondList
+ * @return array
+ */
 function parser(string $key, array $firstList, array $secondList): array
 {
     $valueFirst = boolToString($firstList[$key] ?? null);
