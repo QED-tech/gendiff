@@ -6,7 +6,7 @@ use function Functional\flatten;
 
 function plain(array $diff, string $parentKey = ''): string
 {
-    return implode(PHP_EOL, array_filter(flatten(array_map(function ($item) use ($parentKey) {
+    return implode(PHP_EOL, array_filter(flatten(array_map(function ($item) use ($parentKey): string {
         $key = $parentKey === '' ? $item['key'] : $parentKey . "." . $item['key'];
         $value = checkValuePlain($item['value'] ?? '');
         $oldValue = checkValuePlain($item['oldValue'] ?? '');
@@ -23,7 +23,6 @@ function plain(array $diff, string $parentKey = ''): string
             default:
                 return '';
         }
-        return '';
     }, $diff))));
 }
 

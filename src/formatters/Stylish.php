@@ -7,7 +7,7 @@ const SPACE_COUNT = 4;
 function stylish(array $diff, $space = 2): string
 {
     [$sp, $spCloseTag] = getSpace($space);
-    return '{' . PHP_EOL . implode(PHP_EOL, array_map(function ($item) use ($sp, $space) {
+    return '{' . PHP_EOL . implode(PHP_EOL, array_map(function ($item) use ($sp, $space): string {
         $key = "{$item['key']}:";
         $value = parseValue($item['value'] ?? '', $space + SPACE_COUNT);
         $oldValue = parseValue($item['oldValue'] ?? '', $space + SPACE_COUNT);
@@ -26,7 +26,6 @@ function stylish(array $diff, $space = 2): string
             default:
                 return '';
         }
-        return '';
     }, $diff)) . PHP_EOL . $spCloseTag . '}';
 }
 
@@ -36,7 +35,7 @@ function parseValue($value, $space = 0): string
         return $value;
     }
     [$sp, $spCloseTag] = getSpace($space);
-    return '{' . PHP_EOL . implode(PHP_EOL, array_map(function ($item) use ($value, $space, $sp) {
+    return '{' . PHP_EOL . implode(PHP_EOL, array_map(function ($item) use ($value, $space, $sp): string {
         $val = parseValue($item, $space + SPACE_COUNT);
         $key = array_search($item, $value, true);
         return $sp . "  {$key}: {$val}";
