@@ -14,8 +14,7 @@ function getFiles(string $firstFilePath, string $secondFilePath): array
 function getAsArrayByExtension(string $file): array
 {
     $extension = pathinfo($file, PATHINFO_EXTENSION);
-    $content = file_get_contents($file);
-    $content = $content === false ? '' : $content;
+    $content = file_get_contents($file) === false ? '' : file_get_contents($file);
     switch ($extension) {
         case 'json':
             return json_decode($content, true);

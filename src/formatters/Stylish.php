@@ -6,55 +6,41 @@ const SPACE_COUNT = 4;
 
 function stylish(array $diff, $space = 2): string
 {
-    $result = '{' . PHP_EOL;
     [$sp, $spCloseTag] = getSpace($space);
-
-    array_map(function ($item) use (&$result, $space, $sp) {
+    return '{' . PHP_EOL . implode(PHP_EOL, array_map(function ($item) use ($sp, $space) {
         $key = "{$item['key']}:";
-        $value = checkValueStylish($item['value'] ?? '', $space + SPACE_COUNT);
-        $oldValue = checkValueStylish($item['oldValue'] ?? '', $space + SPACE_COUNT);
-        $newValue = checkValueStylish($item['newValue'] ?? '', $space + SPACE_COUNT);
-
+        $value = parseValue($item['value'] ?? '', $space + SPACE_COUNT);
+        $oldValue = parseValue($item['oldValue'] ?? '', $space + SPACE_COUNT);
+        $newValue = parseValue($item['newValue'] ?? '', $space + SPACE_COUNT);
         switch ($item['description']) {
             case 'parent':
-                $result .= $sp . "  $key ";
-                $result .= stylish($item['children'], $space + SPACE_COUNT);
-                break;
-
+                return $sp . "  $key " . stylish($item['children'], $space + SPACE_COUNT);
             case 'deleted':
-                $result .= $sp . "- $key {$value}" . PHP_EOL;
-                break;
+                return $sp . "- $key {$value}";
             case 'unchanged':
-                $result .= $sp . "  $key {$value}" . PHP_EOL;
-                break;
+                return $sp . "  $key {$value}";
             case 'update':
-                $result .= $sp . "- $key {$oldValue}" . PHP_EOL;
-                $result .= $sp . "+ $key {$newValue}" . PHP_EOL;
-                break;
+                return $sp . "- $key {$oldValue}" . PHP_EOL . $sp . "+ $key {$newValue}";
             case 'added':
-                $result .= $sp . "+ $key {$value}" . PHP_EOL;
-                break;
+                return $sp . "+ $key {$value}";
+            default:
+                return '';
         }
-    }, $diff);
-
-    return $result . $spCloseTag . '}' . PHP_EOL;
+        return '';
+    }, $diff)) . PHP_EOL . $spCloseTag . '}';
 }
 
-function checkValueStylish($value, $space = 0): string
+function parseValue($value, $space = 0): string
 {
     if (!is_array($value)) {
         return $value;
     }
-
     [$sp, $spCloseTag] = getSpace($space);
-    $result = '{' . PHP_EOL;
-    array_map(function ($item) use ($space, $sp, &$result, $value) {
-        $val = checkValueStylish($item, $space + SPACE_COUNT);
+    return '{' . PHP_EOL . implode(PHP_EOL, array_map(function ($item) use ($value, $space, $sp) {
+        $val = parseValue($item, $space + SPACE_COUNT);
         $key = array_search($item, $value, true);
-        $result .= $sp . "  {$key}: {$val}" . PHP_EOL;
-    }, $value);
-
-    return $result . $spCloseTag . '}';
+        return $sp . "  {$key}: {$val}";
+    }, $value)) . PHP_EOL . $spCloseTag . '}';
 }
 
 function getSpace(int $space): array

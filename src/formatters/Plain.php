@@ -21,8 +21,9 @@ function plain(array $diff, string $parentKey = ''): string
             case 'added':
                 return "Property '$key' was added with value: $value";
             default:
-                return;
+                return '';
         }
+        return '';
     }, $diff))));
 }
 

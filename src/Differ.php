@@ -103,7 +103,7 @@ function formatted(string $format, array $diff): string
 {
     switch ($format) {
         case 'stylish':
-            return trim(stylish($diff));
+            return stylish($diff);
         case 'plain':
             return trim(plain($diff));
         case 'json':
