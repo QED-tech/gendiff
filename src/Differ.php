@@ -89,14 +89,14 @@ function boolToString($value)
 
 function getAllUniqueKeys(array $firstList, array $secondList): array
 {
-    $keys = array_unique(
+    $collection = collect(array_unique(
         array_merge(
             array_keys($firstList),
             array_keys($secondList)
         )
-    );
-    sort($keys, SORT_STRING);
-    return $keys;
+    ));
+    $sorted = $collection->sort(SORT_STRING);
+    return $sorted->all();
 }
 
 function formatted(string $format, array $diff): string

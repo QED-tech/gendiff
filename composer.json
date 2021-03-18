@@ -28,7 +28,8 @@
         "php": ">=7.4",
         "docopt/docopt": "^1.0",
         "lstrojny/functional-php": "^1.17",
-        "symfony/yaml": "^5.2"
+        "symfony/yaml": "^5.2",
+        "tightenco/collect": "^8.19"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.5",
