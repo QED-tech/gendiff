@@ -50,7 +50,7 @@ function checkValueStylish($value, $space = 0): string
     $result = '{' . PHP_EOL;
     array_map(function ($item) use ($space, $sp, &$result, $value) {
         $val = checkValueStylish($item, $space + SPACE_COUNT);
-        $key = array_search($item, $value);
+        $key = array_search($item, $value, true);
         $result .= $sp . "  {$key}: {$val}" . PHP_EOL;
     }, $value);
 
