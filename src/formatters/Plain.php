@@ -6,7 +6,7 @@ function plain(array $diff, string $parentKey = ''): string
 {
     $result = '';
 
-    foreach ($diff as $item) {
+    array_map(function ($item) use (&$result, $parentKey) {
         $key = $parentKey === '' ? $item['key'] : $parentKey . "." . $item['key'];
         $value = checkValuePlain($item['value'] ?? '');
         $oldValue = checkValuePlain($item['oldValue'] ?? '');
@@ -25,13 +25,18 @@ function plain(array $diff, string $parentKey = ''): string
                 $result .= "Property '$key' was added with value: $value" . PHP_EOL;
                 break;
             default:
-                continue 2;
+                break;
         }
-    }
+    }, $diff);
 
     return $result;
 }
 
+/**
+ *
+ * @param mixed $value
+ * @return mixed
+ */
 function checkValuePlain($value)
 {
     if ($value === "true" || $value === "false" || $value === "null") {

@@ -17,6 +17,7 @@
             "./src/Differ.php",
             "./src/formatters/Plain.php",
             "./src/formatters/Stylish.php",
+            "./src/formatters/Pretty.php",
             "./src/FileParser.php"
         ]
     },

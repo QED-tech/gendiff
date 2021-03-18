@@ -6,30 +6,24 @@ use Symfony\Component\Yaml\Yaml;
 
 function getFiles(string $firstFilePath, string $secondFilePath): array
 {
-    [$first, $second] = getAsArrayByExtension([$firstFilePath, $secondFilePath]);
+    $first = getAsArrayByExtension($firstFilePath);
+    $second = getAsArrayByExtension($secondFilePath);
     return [$first, $second];
 }
 
-function getAsArrayByExtension(array $files): array
+function getAsArrayByExtension(string $file): array
 {
-    $result = [];
-    foreach ($files as $file) {
-        $extension = pathinfo($file, PATHINFO_EXTENSION);
-        $content = file_get_contents($file);
-        switch ($extension) {
-            case 'json':
-                $result[] = json_decode($content, true);
-                break;
-            case 'yml':
-                $result[] = Yaml::parse($content);
-                break;
-            case 'yaml':
-                $result[] = Yaml::parse($content);
-                break;
-            default:
-                throw new \Exception("Format '$extension' is unknown for parsing");
-        }
+    $extension = pathinfo($file, PATHINFO_EXTENSION);
+    $content = file_get_contents($file);
+    $content = $content === false ? '' : $content;
+    switch ($extension) {
+        case 'json':
+            return json_decode($content, true);
+        case 'yml':
+            return Yaml::parse($content);
+        case 'yaml':
+            return Yaml::parse($content);
+        default:
+            throw new \Exception("Format '$extension' is unknown for parsing");
     }
-
-    return array_values($result);
 }

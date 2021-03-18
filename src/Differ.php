@@ -3,6 +3,7 @@
 namespace Differ\Differ;
 
 use function Differ\Differ\Formatters\plain;
+use function Differ\Differ\Formatters\pretty;
 use function Differ\Differ\Formatters\stylish;
 
 function genDiff(string $firstFile, string $secondFile, string $format = 'stylish'): string
@@ -94,7 +95,7 @@ function getAllUniqueKeys(array $firstList, array $secondList): array
             array_keys($secondList)
         )
     );
-    asort($keys, SORT_STRING);
+    sort($keys, SORT_STRING);
     return $keys;
 }
 
@@ -106,7 +107,7 @@ function formatted(string $format, array $diff): string
         case 'plain':
             return trim(plain($diff));
         case 'json':
-            return json_encode($diff, JSON_PRETTY_PRINT);
+            return pretty($diff);
         default:
             return trim(stylish($diff));
     }

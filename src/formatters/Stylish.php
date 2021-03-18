@@ -8,7 +8,8 @@ function stylish(array $diff, $space = 2): string
 {
     $result = '{' . PHP_EOL;
     [$sp, $spCloseTag] = getSpace($space);
-    foreach ($diff as $item) {
+
+    array_map(function ($item) use (&$result, $space, $sp) {
         $key = "{$item['key']}:";
         $value = checkValueStylish($item['value'] ?? '', $space + SPACE_COUNT);
         $oldValue = checkValueStylish($item['oldValue'] ?? '', $space + SPACE_COUNT);
@@ -34,7 +35,7 @@ function stylish(array $diff, $space = 2): string
                 $result .= $sp . "+ $key {$value}" . PHP_EOL;
                 break;
         }
-    }
+    }, $diff);
 
     return $result . $spCloseTag . '}' . PHP_EOL;
 }
@@ -47,10 +48,12 @@ function checkValueStylish($value, $space = 0): string
 
     [$sp, $spCloseTag] = getSpace($space);
     $result = '{' . PHP_EOL;
-    foreach ($value as $key => $val) {
-        $val = checkValueStylish($val, $space + SPACE_COUNT);
+    array_map(function ($item) use ($space, $sp, &$result, $value) {
+        $val = checkValueStylish($item, $space + SPACE_COUNT);
+        $key = array_search($item, $value);
         $result .= $sp . "  {$key}: {$val}" . PHP_EOL;
-    }
+    }, $value);
+
     return $result . $spCloseTag . '}';
 }
 
