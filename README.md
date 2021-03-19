@@ -4,3 +4,5 @@
 
 # PHP-Project-lvl2
 Gendiff - Cli application for search differences in configuration files 
+
+[![asciicast](https://asciinema.org/a/Pe6QypnLEmFWssNAjCOJN1iii.svg)](https://asciinema.org/a/Pe6QypnLEmFWssNAjCOJN1iii)
